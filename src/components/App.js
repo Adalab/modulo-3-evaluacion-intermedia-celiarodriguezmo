@@ -12,7 +12,7 @@ function App() {
 
   const [inputSearch, setInputSearch] = useState("");
 
-  const [characterFiltered, setCharacterFiltered] = useState("Todos");
+  /*  const [characterFiltered, setCharacterFiltered] = useState("Todos"); */
 
   const html = dataApi
 
@@ -49,9 +49,9 @@ function App() {
     setInputSearch(event.target.value);
   };
 
-  const handleCharacterFilter = (event) => {
+  /*  const handleCharacterFilter = (event) => {
     setCharacterFiltered(event.currentTarget.value);
-  };
+  }; */
 
   return (
     <div className='App'>
@@ -70,7 +70,7 @@ function App() {
           name='characterFilter'
           id='characterFilter'
           value={dataApi.character}
-          onChange={handleCharacterFilter}
+          /*  onChange={handleCharacterFilter} */
         >
           <option>Todos</option>
           <option>Ross</option>
