@@ -1,32 +1,60 @@
 import "../styles/App.scss";
-import objectDataApi from "../services/api.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import getDataApi from "../services/fetch";
 
 function App() {
-  const [dataApi, setDataApi] = useState(objectDataApi);
-
+  const [dataApi, setDataApi] = useState([]);
   const [dataForm, setDataFrom] = useState({
     quote: "",
     character: "",
   });
-
   const [inputSearch, setInputSearch] = useState("");
+  const [inputSelectCharacter, setInputSelectCharacter] = useState("");
 
-  /*  const [characterFiltered, setCharacterFiltered] = useState("Todos"); */
+  useEffect(() => {
+    if (dataApi.length === 0) {
+      getDataApi().then((cleanData) => {
+        setDataApi(cleanData);
+      });
+    }
+  }, []);
 
-  const html = dataApi
-
-    .filter((sentence) =>
-      sentence.quote
-        .toLocaleLowerCase()
-        .includes(inputSearch.toLocaleLowerCase())
-    )
-    .map((oneQuote, index) => (
-      <li key={index}>
-        {oneQuote.quote} <span> - </span>
-        {oneQuote.character}
-      </li>
-    ));
+  function paintList() {
+    if (inputSearch !== "") {
+      const filterQuote = dataApi
+        .filter((data) =>
+          data.quote
+            .toLocaleLowerCase()
+            .includes(inputSearch.toLocaleLowerCase())
+        )
+        .map((data, index) => (
+          <li key={index}>
+            {data.quote} <span> - </span>
+            {data.character}
+          </li>
+        ));
+      return filterQuote;
+    }
+    if (inputSelectCharacter !== "") {
+      const filtroCharacter = dataApi
+        .filter((data) => data.character === inputSelectCharacter)
+        .map((data, index) => (
+          <li key={index}>
+            {data.quote} <span> - </span>
+            {data.character}
+          </li>
+        ));
+      return filtroCharacter;
+    } else {
+      const List = dataApi.map((data, index) => (
+        <li key={index}>
+          {data.quote} <span> - </span>
+          {data.character}
+        </li>
+      ));
+      return List;
+    }
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,6 +63,7 @@ function App() {
     const inputQuote = event.target.value;
     setDataFrom({ ...dataForm, quote: inputQuote });
   };
+
   const handleInputCharacter = (event) => {
     const inputCharacter = event.target.value;
     setDataFrom({ ...dataForm, character: inputCharacter });
@@ -49,9 +78,9 @@ function App() {
     setInputSearch(event.target.value);
   };
 
-  /*  const handleCharacterFilter = (event) => {
-    setCharacterFiltered(event.currentTarget.value);
-  }; */
+  const handleCharacterFilter = (event) => {
+    setInputSelectCharacter(event.currentTarget.value);
+  };
 
   return (
     <div className='App'>
@@ -70,19 +99,19 @@ function App() {
           name='characterFilter'
           id='characterFilter'
           value={dataApi.character}
-          /*  onChange={handleCharacterFilter} */
+          onChange={handleCharacterFilter}
         >
-          <option>Todos</option>
-          <option>Ross</option>
-          <option>Mónica</option>
-          <option>Rachel</option>
-          <option>Joey</option>
-          <option>Chandler</option>
-          <option>Phoebe</option>
+          <option value=''> Todos</option>
+          <option value={dataApi.character}> Ross</option>
+          <option value={dataApi.character}> Mónica</option>
+          <option value={dataApi.character}> Rachel</option>
+          <option value={dataApi.character}> Joey</option>
+          <option value={dataApi.character}> Chandler</option>
+          <option value={dataApi.character}> Phoebe</option>
         </select>
       </form>
 
-      <ul>{html}</ul>
+      <ul>{paintList()}</ul>
 
       <h2>Añadir una nueva frase</h2>
       <form onSubmit={handleSubmit}>
