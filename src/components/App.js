@@ -72,6 +72,7 @@ function App() {
   const handleNewItem = (event) => {
     event.preventDefault();
     setDataApi([...dataApi, dataForm]);
+    setDataFrom({ ...dataForm, quote: "", character: "" });
   };
 
   const handleInputSearchQuote = (event) => {
@@ -98,7 +99,7 @@ function App() {
         <select
           name='characterFilter'
           id='characterFilter'
-          value={dataApi.character}
+          value={inputSelectCharacter}
           onChange={handleCharacterFilter}
         >
           <option value=''> Todos</option>
