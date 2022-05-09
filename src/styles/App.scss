@@ -1,38 +1,93 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header{
+width: 100vw;
+height: 100vh;
+padding-bottom: 15px;
+  background-image: url("../images/friends-image.jpg");
+  background-size: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(97, 65, 148, 0.788);
+  
+}
+.frame{
+  width: 150px;
+  position: sticky;
+top: 100px;
+}
+.title{
+  padding-top: 220px;
+ font-size: 2.5rem; 
+ color: white;
+ font-family: "kalam", cursive;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form{
+  height: 30vh;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+   background-color: rgb(219, 159, 80);
+}
+.label-input{
+  font-family: "kalam", cursive;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  color: white;
+ 
+}
+.input{
+  font-style: italic;
+  font-size: 1rem;
+  
+}
+.element{
+  height: 60px;
+  border: solid;
+  border-radius: 5px, ;
+  color: rgba(97, 65, 148, 0.788);
+  text-align: center;
+  padding: 20px;
+  margin: 5px;
+  }
+.sectionForm{
+  height: 70vh;
+  background-color: rgb(219, 159, 80);
+  background-image: url("../images/perk.webp");
+  background-size: 550px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+   padding: 20px;
+  
+}
+.form-section{
+padding: 25px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+
+}
+.title-section{
+  margin-top: 15px;
+font-size: 1.70rem;
+font-family: "kalam", cursive;
+color: white;
+}
+.label-input2{
+  font-family: "kalam", cursive;
+  font-size: 1.2rem;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button{
+  margin: 20px;
+  border-radius: 5px;
+  border-color: rgb(128, 41, 120);
+  height: 40px;
+    background-color: rgba(106, 50, 139, 0.658);
+  color: white;
+  font-family: "kalam", cursive;
 }

@@ -1,6 +1,7 @@
 import "../styles/App.scss";
 import { useState, useEffect } from "react";
 import getDataApi from "../services/fetch";
+import frame from "../images/frame-vector2.png";
 
 function App() {
   const [dataApi, setDataApi] = useState([]);
@@ -28,7 +29,7 @@ function App() {
             .includes(inputSearch.toLocaleLowerCase())
         )
         .map((data, index) => (
-          <li key={index}>
+          <li className='element' key={index}>
             {data.quote} <span> - </span>
             {data.character}
           </li>
@@ -39,7 +40,7 @@ function App() {
       const filtroCharacter = dataApi
         .filter((data) => data.character === inputSelectCharacter)
         .map((data, index) => (
-          <li key={index}>
+          <li className='element' key={index}>
             {data.quote} <span> - </span>
             {data.character}
           </li>
@@ -47,7 +48,7 @@ function App() {
       return filtroCharacter;
     } else {
       const List = dataApi.map((data, index) => (
-        <li key={index}>
+        <li className='element' key={index}>
           {data.quote} <span> - </span>
           {data.character}
         </li>
@@ -85,18 +86,27 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>Frases de Friends</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='inputSearchQuote'>Filtrar por frase</label>
+      <header className='header'>
+        <img className='frame' src={frame} alt='' />
+        <h1 className='title'>Frases de F·R·I·E·N·D·S</h1>
+      </header>
+      <form className='form' onSubmit={handleSubmit}>
+        <label className='label-input' htmlFor='inputSearchQuote'>
+          Filtrar por frase
+        </label>
         <input
+          className='input'
           type='text'
           value={inputSearch}
           name='inputSearchQuote'
           onChange={handleInputSearchQuote}
+          placeholder="Ej: I grew up in a house with Monica, okay. If you didn't eat fast, you didn't eat. - Ross"
         />
-        <label htmlFor='characterFilter'>Filtrar por personaje</label>
+        <label className='label-input' htmlFor='characterFilter'>
+          Filtrar por personaje
+        </label>
         <select
+          className='input'
           name='characterFilter'
           id='characterFilter'
           value={inputSelectCharacter}
@@ -113,29 +123,39 @@ function App() {
       </form>
 
       <ul>{paintList()}</ul>
-
-      <h2>Añadir una nueva frase</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='quote'>Frase</label>
-        <input
-          type='text'
-          value={dataForm.quote}
-          name='quote'
-          onChange={handleInputQuote}
-        />
-        <label htmlFor='character'>Personaje</label>
-        <input
-          type='text'
-          value={dataForm.character}
-          name='character'
-          onChange={handleInputCharacter}
-        />
-        <input
-          type='button'
-          value='Añadir nueva frase'
-          onClick={handleNewItem}
-        />
-      </form>
+      <section className='sectionForm'>
+        <h2 className='title-section'>¡Añáde una nueva frase mítica!</h2>
+        <form className='form-section' onSubmit={handleSubmit}>
+          <label className='label-input2' htmlFor='quote'>
+            Frase
+          </label>
+          <input
+            className='input'
+            type='text'
+            value={dataForm.quote}
+            name='quote'
+            placeholder='Ej: Oh Dios mio!'
+            onChange={handleInputQuote}
+          />
+          <label className='label-input2' htmlFor='character'>
+            Personaje
+          </label>
+          <input
+            className='input'
+            type='text'
+            value={dataForm.character}
+            name='character'
+            placeholder='Janice'
+            onChange={handleInputCharacter}
+          />
+          <input
+            className='button'
+            type='button'
+            value='Añadir frase memorable'
+            onClick={handleNewItem}
+          />
+        </form>
+      </section>
     </div>
   );
 }
